@@ -3,6 +3,7 @@ on: push
 jobs:
   job_1:
     strategy:
+      max-parallel: 1
       matrix:
         os: [ubuntu-latest, windiws-latest]
     runs-on: ${{ matrix.os }}
