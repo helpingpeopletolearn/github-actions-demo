@@ -10,10 +10,10 @@ jobs:
         - name: Checkout Repo
           uses: actions/checkout@v5
 
-        - name: List files
-          run: ls
+        - name: Create Dragon
+          run: cowsay -f dragon "I am breathing fire" >> dragon.txt
 
-        - name: Print Readme
-          run: cat README.md
+        - name: Show Dragon
+          run: cat dragon.txt
 
         
