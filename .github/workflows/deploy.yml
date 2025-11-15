@@ -8,6 +8,7 @@ jobs:
         concurrency: 
             group: prod-deployment
             cancel-in-progress: true
+        timeout-minutes: 2
         runs-on: ubuntu-latest
         steps:
         - name: Deploying code
