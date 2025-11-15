@@ -1,4 +1,4 @@
-name: Concurrency Workflow
+name: Matix Workflow
 on: push
 
 jobs:
