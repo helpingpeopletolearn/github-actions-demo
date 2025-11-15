@@ -10,6 +10,12 @@ jobs:
 
         - name: Create Dragon
           run: cowsay -f dragon "I am breathing fire" >> dragon.txt
+
+        - name: Upload artifact
+          uses: actions/upload-artifact@v4
+          with: 
+            name: dragon-file
+            path: dragon.txt
     
     job_2:
         needs: job_1
@@ -18,6 +24,11 @@ jobs:
         - name: Wait for 10S
           run: sleep 10
 
+        - name: Download artifact
+          uses: actions/download-artifact@v5
+          with:
+            name: dragon-file
+
         - name: Check if dragon has arrived
           run: grep -i "fire" dragon.txt
 
@@ -25,5 +36,10 @@ jobs:
         needs: [job_2]
         runs-on: ubuntu-latest
         steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v5
+          with:
+            name: dragon-file
+                        
         - name: Call dragon
           run: cat dragon.txt
