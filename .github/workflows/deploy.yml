@@ -5,6 +5,9 @@ on:
 
 jobs:
     job_1:
+        concurrency: 
+            group: prod-deployment
+            cancel-in-progress: true
         runs-on: ubuntu-latest
         steps:
         - name: Deploying code
