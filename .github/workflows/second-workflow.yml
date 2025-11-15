@@ -1,0 +1,27 @@
+name: Second Workflow
+on: push
+
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Install cowsay
+          run: sudo apt-get install cowsay -y
+
+        - name: Create Dragon
+          run: cowsay -f dragon "I am breathing fire" >> dragon.txt
+    
+    job_2:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Wait for 10S
+          run: sleep 10
+
+        - name: Check if dragon has arrived
+          run: grep -i "fire" dragon.txt
+
+    job_3:
+        runs-on: ubuntu-latest
+        steps:
+        - name: Call dragon
+          run: cat dragon.txt
