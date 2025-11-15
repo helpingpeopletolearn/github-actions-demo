@@ -1,0 +1,69 @@
+name: Second Workflow
+on: push
+
+#Workflow level variable
+env:
+    pkg_name2: ntp
+
+jobs:
+    job_1:
+        #Job level variable
+        env:
+            pkg_name1: nano
+        runs-on: ubuntu-latest
+        steps:
+        # Step level variable
+        - name: Install cowsay
+          env:
+            pkg_name: cowsay
+          run: echo sudo apt-get install ${{ env.pkg_name }} -y
+
+        - name: Create Dragon
+          run: cowsay -f dragon "I am breathing fire" >> dragon.txt
+
+        - name: Job level var
+          run: echo ${{ env.pkg_name1 }}
+
+        - name: Upload artifact
+          uses: actions/upload-artifact@v4
+          with: 
+            name: dragon-file
+            path: dragon.txt
+    
+    job_2:
+        needs: job_1
+        runs-on: ubuntu-latest
+        steps:
+        - name: Wait for 10S
+          run: sleep 10
+
+        - name: Download artifact
+          uses: actions/download-artifact@v5
+          with:
+            name: dragon-file
+
+        - name: Check if dragon has arrived
+          run: grep -i "fire" dragon.txt
+
+        - name: Workflow level var
+          run: echo ${{ env.pkg_name2 }}
+
+    job_3:
+        needs: [job_2]
+        runs-on: ubuntu-latest
+        steps:
+        - name: Download artifact
+          uses: actions/download-artifact@v5
+          with:
+            name: dragon-file
+
+        - name: Call dragon
+          run: cat dragon.txt
+
+        - name: Repo level var
+          run: echo ${{ vars.REPO_VAR }}
+
+        - name: Repo level secret
+          run: echo ${{ secrets.PWD }}
+
+    
