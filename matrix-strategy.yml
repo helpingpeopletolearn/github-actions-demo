@@ -1,0 +1,12 @@
+name: Concurrency Workflow
+on: push
+
+jobs:
+  job_1:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+      runs-on: ${{ matrix.os }}
+      steps:
+      - name: test
+        run: echo "hello"
