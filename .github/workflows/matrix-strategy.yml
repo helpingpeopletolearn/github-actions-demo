@@ -1,0 +1,11 @@
+name: Matix Workflow
+on: push
+jobs:
+  job_1:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windiws-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - name: test
+      run: echo "test"
