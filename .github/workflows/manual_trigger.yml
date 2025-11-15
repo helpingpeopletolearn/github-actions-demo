@@ -1,0 +1,9 @@
+name: Third Workflow
+on: workflow_dispatch
+
+jobs:
+    job_1:
+        runs-on: ubuntu-latest
+        steps:
+        - name: test
+          run: echo "test"
